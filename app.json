@@ -1867,7 +1867,6 @@
         "measure_battery_cycles",
         "meter_power.throughput",
         "alarm_problem",
-        "alarm_battery",
         "alarm_connectivity",
         "alarm_generic.control"
       ],
