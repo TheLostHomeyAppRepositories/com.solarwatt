@@ -29,10 +29,10 @@ module.exports = class SolarwattBatteryDriver extends CommonDriver {
     this.homey.flow.getActionCard('set_soc_limits')
       .registerRunListener(({
         device, min, max, ongrid,
-      }) => device.setControl({
-        battery_min_soc: min,
-        battery_max_soc: max,
-        battery_min_soc_ongrid: ongrid,
+      }) => device.setControl({ // arguments 0-100, as stored in existing flows; the capabilities 0-1
+        battery_min_soc: min / 100,
+        battery_max_soc: max / 100,
+        battery_min_soc_ongrid: ongrid / 100,
       }));
   }
 
