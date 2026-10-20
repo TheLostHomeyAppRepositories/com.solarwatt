@@ -48,6 +48,41 @@ assert.strictEqual(control.guard({ device, values: { battery_max_soc: 0.05 } }),
   const client = { writeRegister: async (address, value) => written.push([address, value]) };
   await control.write({ client, device, values: { battery_min_soc: 0.29, battery_min_soc_ongrid: 0.3 } });
   assert.deepStrictEqual(written, [[46610, 95], [46611, 30], [46609, 29]], 'whole percents, in a valid order');
+
+  // force charge stops at max SoC, also where percent / 100 * 100 is not the percent again
+  const remote = battery.controls.find((c) => c.capabilities.includes('target_power_mode'));
+  for (const percent of [14, 28, 55, 56, 95]) {
+    const values = {
+      measure_battery: percent, battery_max_soc: percent / 100, target_power_mode: 'force_charge', target_power: 0,
+    };
+    const setpoints = [];
+    await remote.write({
+      client: {
+        writeRegister: async () => {},
+        writeRegisters: async (address, words) => {
+          if (address === 46003) setpoints.push(words);
+        },
+      },
+      device: {
+        getCapabilityValue: (cap) => values[cap], setCapabilityValue: async () => {}, noteWrites: async () => {}, error: () => {},
+      },
+      values: { target_power_mode: 'force_charge' },
+    });
+    assert.deepStrictEqual(setpoints, [[0, 0]], `no charging at max SoC ${percent}%`);
+  }
+
+  // values stored as 0-100 (v1.2.1 and older) become 0-1; values already 0-1 stay
+  const stored = { battery_min_soc: 10, battery_max_soc: 95, battery_min_soc_ongrid: 0.2 };
+  await battery.migrateValues({
+    hasCapability: (cap) => cap in stored,
+    getCapabilityValue: (cap) => stored[cap],
+    setCapabilityValue: async (cap, value) => {
+      stored[cap] = value;
+    },
+    log: () => {},
+    error: () => {},
+  });
+  assert.deepStrictEqual(stored, { battery_min_soc: 0.1, battery_max_soc: 0.95, battery_min_soc_ongrid: 0.2 }, 'old values migrated');
   console.log('soc limits: all checks passed');
 })().catch((error) => {
   console.error(error);
