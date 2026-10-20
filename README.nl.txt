@@ -1,10 +1,10 @@
-Verbind je SOLARWATT vision-apparaten met Homey via je lokale netwerk (Modbus TCP). Een cloudaccount is niet nodig.
+Verbind je SOLARWATT-apparaten met Homey via je lokale netwerk (Modbus TCP). Een cloudaccount is niet nodig.
 
 Ondersteunde apparaten:
 - Inverter vision: zonnevermogen en -opbrengst, omvormervermogen, huisverbruik, netwaarden en storingen. Je kunt het uitgangsvermogen en de teruglevering aan het net begrenzen.
 - Battery vision: laadtoestand en gezondheid, vermogen, energie, temperaturen en storingen. Homey kan de batterij laden en ontladen, en je kunt de werkmodus en SoC-grenzen instellen.
 - Netmeter aangesloten op de omvormer: vermogen per fase, import- en exportenergie, spanningen.
-- Charger vision: laadvermogen, energie en fasewaarden. Start en stop het laden vanuit Homey.
+- Charger: laadvermogen, energie en fasewaarden. Start en stop het laden vanuit Homey.
 
 Vereisten: Modbus TCP moet aan staan op de apparaten (vraag je installateur), en Homey moet in hetzelfde netwerk zitten. Geef de apparaten een vast IP-adres in je router. Ze worden automatisch gevonden; anders vul je het IP-adres zelf in.
 
