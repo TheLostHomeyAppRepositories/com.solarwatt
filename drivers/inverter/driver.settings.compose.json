@@ -24,6 +24,9 @@
         "$extends": "port"
       },
       {
+        "$extends": "followMdns"
+      },
+      {
         "$extends": "mdnsName"
       },
       {
