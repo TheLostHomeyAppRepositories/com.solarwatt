@@ -13,7 +13,8 @@
     "noChargingSession": "No charging session: start charging first.",
     "unplugFirst": "Unplug the cable first: the charger only changes this without a cable in it.",
     "socRange": "SoC limits must be 10–100%, with minimum ≤ minimum on grid ≤ maximum.",
-    "writeFailed": "Could not send the command:"
+    "writeFailed": "Could not send the command:",
+    "notSupported": "This device does not support that."
   },
   "pair": {
     "deviceName": {

@@ -13,7 +13,8 @@
     "noChargingSession": "Ingen laddsession: starta laddningen först.",
     "unplugFirst": "Dra först ur kabeln: laddaren ändrar bara detta utan kabel i.",
     "socRange": "SoC-gränser måste vara 10–100 %, med minimum ≤ minimum mot nätet ≤ maximum.",
-    "writeFailed": "Kunde inte skicka kommandot:"
+    "writeFailed": "Kunde inte skicka kommandot:",
+    "notSupported": "Den här enheten stöder inte det."
   },
   "pair": {
     "deviceName": {

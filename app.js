@@ -56,7 +56,7 @@ module.exports = class SolarwattApp extends Homey.App {
   }
 
   async onUninit() {
-    if (this.pool) this.pool.destroy();
+    // the pool is left to the devices: their onUninit still hands control back through it
     this.log('Solarwatt app unloaded');
   }
 
